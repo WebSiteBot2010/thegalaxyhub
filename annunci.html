@@ -6,6 +6,17 @@
   <title>Annunci - TheGalaxyHub</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <style>
+    body { font-family: Arial,sans-serif; background:#f4f4f4; color:#222; }
+    header, footer { background:#111; color:#fff; padding:10px 20px; }
+    header nav ul { display:flex; list-style:none; padding:0; margin:0; }
+    header nav li { margin-left:15px; }
+    header nav a { color:#fff; text-decoration:none; }
+    .container { padding:20px; }
+    ul { list-style:none; padding:0; }
+    li { padding:10px; margin-bottom:10px; background:#fff; border-radius:5px; box-shadow:0 0 5px rgba(0,0,0,0.2);}
+    li strong { display:block; font-size:1.1em; margin-bottom:5px; color:#111;}
+  </style>
 </head>
 <body>
 
@@ -39,31 +50,24 @@
 
 <script>
   function aggiornaDatiDallaStorage(key) {
-    if (key === 'annunci') {
+    if(key === 'annunci') {
       const annunci = JSON.parse(localStorage.getItem('annunci')) || [];
-      const annunciList = document.getElementById('annunci-contents');
-      annunciList.innerHTML = '';
-      if (annunci.length === 0) {
-        annunciList.textContent = 'Nessun annuncio disponibile.';
+      const list = document.getElementById('annunci-contents');
+      list.innerHTML = '';
+      if(annunci.length===0){
+        list.textContent = 'Nessun annuncio disponibile.';
       } else {
-        annunci.forEach(annuncio => {
+        annunci.forEach(a=>{
           const li = document.createElement('li');
-          li.textContent = annuncio;
-          annunciList.appendChild(li);
+          li.innerHTML = `<strong>${a.titolo}</strong>${a.descrizione}`;
+          list.appendChild(li);
         });
       }
     }
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    aggiornaDatiDallaStorage('annunci');
-  });
-
-  window.addEventListener('storage', (event) => {
-    if (event.key === 'annunci') {
-      aggiornaDatiDallaStorage('annunci');
-    }
-  });
+  document.addEventListener('DOMContentLoaded', ()=>{ aggiornaDatiDallaStorage('annunci'); });
+  window.addEventListener('storage', (event)=>{ if(event.key==='annunci') aggiornaDatiDallaStorage('annunci'); });
 </script>
 
 </body>

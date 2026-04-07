@@ -31,8 +31,8 @@ if (window.location.pathname.endsWith('dashboard.html')) {
 }
 
 // DATI INIZIALI
-let annunci = JSON.parse(localStorage.getItem("annunci")) || ["Benvenuto su TheGalaxyHub!"];
-let comunicazioni = JSON.parse(localStorage.getItem("comunicazioni")) || ["Prima comunicazione!"];
+let annunci = JSON.parse(localStorage.getItem("annunci")) || [];
+let comunicazioni = JSON.parse(localStorage.getItem("comunicazioni")) || [];
 let team = JSON.parse(localStorage.getItem("team")) || [{ nome: "Admin", ruolo: "Founder" }];
 let candidature = JSON.parse(localStorage.getItem("candidature")) || [];
 let unbanRequests = JSON.parse(localStorage.getItem("unbanRequests")) || [];
@@ -46,6 +46,13 @@ function salvaDati() {
   localStorage.setItem("unbanRequests", JSON.stringify(unbanRequests));
 }
 
+// SALVA MODIFICHE (dashboard)
+function salvaModifiche() {
+  salvaDati();
+  popolaListe();
+  alert("Modifiche salvate con successo!");
+}
+
 // MOSTRA SEZIONE DASHBOARD
 function mostraSezione(id) {
   const sections = document.querySelectorAll('.dashboard-section');
@@ -56,23 +63,26 @@ function mostraSezione(id) {
 
 // POPOLA LISTE
 function popolaListe() {
+
   // ANNUNCI
   const annunciList = document.getElementById("annunci-list");
   if (annunciList) {
     annunciList.innerHTML = "";
     annunci.forEach((a, i) => {
       const li = document.createElement("li");
-      li.textContent = a;
-      const btn = document.createElement("button");
-      btn.textContent = "Elimina";
-      btn.onclick = () => {
-        if(confirm(`Eliminare l'annuncio: "${a}"?`)){
+      li.innerHTML = `<strong>${a.titolo}</strong>: ${a.descrizione}`;
+
+      const btnElimina = document.createElement("button");
+      btnElimina.textContent = "Elimina";
+      btnElimina.onclick = () => {
+        if(confirm(`Eliminare l'annuncio: "${a.titolo}"?`)) {
           annunci.splice(i,1);
           salvaDati();
           popolaListe();
         }
-      }
-      li.appendChild(btn);
+      };
+
+      li.appendChild(btnElimina);
       annunciList.appendChild(li);
     });
   }
@@ -179,9 +189,16 @@ function popolaListe() {
 }
 
 // FUNZIONI AGGIUNTA
-function aggiungiAnnuncio(){
-  const testo = prompt("Testo annuncio:");
-  if(testo){ annunci.push(testo); salvaDati(); popolaListe();}
+
+function aggiungiAnnuncioForm(e) {
+  e.preventDefault();
+  const titolo = document.getElementById('annuncio-titolo').value.trim();
+  const descrizione = document.getElementById('annuncio-descrizione').value.trim();
+  if(!titolo || !descrizione) return alert("Titolo e descrizione obbligatori!");
+  annunci.push({titolo, descrizione});
+  salvaDati();
+  popolaListe();
+  document.getElementById('form-annuncio').reset();
 }
 
 function aggiungiComunicazione(){
@@ -202,5 +219,5 @@ function aggiungiTeam(){
 // AL CARICAMENTO DELLA PAGINA
 document.addEventListener("DOMContentLoaded",()=>{
   popolaListe();
-  mostraSezione('annunci'); // default sezione aperta
+  mostraSezione('annunci');
 });
