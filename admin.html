@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel - TheGalaxyHub</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+<div class="container">
+<h1>Admin Panel</h1>
+<nav>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="admin.html">Admin</a></li>
+</ul>
+</nav>
+</div>
+</header>
+
+<main class="container">
+<section id="login-section">
+<h2>Login Admin</h2>
+<input type="email" id="admin-email" placeholder="Email"><br><br>
+<input type="password" id="admin-pass" placeholder="Password"><br><br>
+<button onclick="loginAdmin(document.getElementById('admin-email').value, document.getElementById('admin-pass').value)">Accedi</button>
+</section>
+
+<section id="admin-section" style="display:none;">
+<h2>Gestione Contenuti</h2>
+
+<div>
+<h3>Annunci</h3>
+<ul id="annunci-list"></ul>
+<button onclick="aggiungiAnnuncio()">Aggiungi Annuncio</button>
+</div>
+
+<div>
+<h3>Comunicazioni</h3>
+<ul id="comunicazioni-list"></ul>
+<button onclick="aggiungiComunicazione()">Aggiungi Comunicazione</button>
+</div>
+
+<div>
+<h3>Team</h3>
+<ul id="team-list"></ul>
+<button onclick="aggiungiTeam()">Aggiungi Membro</button>
+</div>
+
+<div>
+<h3>Candidature</h3>
+<ul id="candidature-list"></ul>
+</div>
+
+<div>
+<h3>Richieste Unban</h3>
+<ul id="unban-list"></ul>
+</div>
+
+</section>
+</main>
+
+<footer>
+<div class="container">
+<p>&copy; 2026 TheGalaxyHub</p>
+</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
