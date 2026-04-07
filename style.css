@@ -31,3 +31,80 @@ footer { text-align:center; background:#111; padding:1.5rem 0; color:#aaa; }
 @media(max-width:768px){
     nav { float:none; text-align:center; margin-top:1rem; }
 }
+/* Hero button */
+.cta-button {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 12px 25px;
+  background: #61dafb;
+  color: #0b0c1b;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #61dafb;
+}
+
+/* Cards grid per ultimi annunci */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.cards-grid li {
+  background: rgba(30,30,70,0.8);
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cards-grid li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+}
+
+/* Sezione info con cards */
+.info {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+}
+
+.info-card {
+  flex: 1;
+  background: rgba(20,20,50,0.7);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+.cta-small {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 8px 18px;
+  background: #61dafb;
+  color: #0b0c1b;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.cta-small:hover {
+  background: #0b0c1b;
+  color: #61dafb;
+  box-shadow: 0 0 15px #61dafb;
+}

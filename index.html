@@ -8,41 +8,65 @@
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
+
+<!-- Navbar moderna -->
 <header>
-<div class="container">
-<h1>TheGalaxyHub</h1>
-<nav>
-<ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="annunci.html">Annunci</a></li>
-<li><a href="comunicazioni.html">Comunicazioni</a></li>
-<li><a href="team.html">Team</a></li>
-<li><a href="candidature.html">Candidature</a></li>
-<li><a href="unban.html">Richieste Unban</a></li>
-<li><a href="admin.html">Admin Panel</a></li>
-</ul>
-</nav>
-</div>
+  <div class="container">
+    <h1>TheGalaxyHub</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="annunci.html">Annunci</a></li>
+        <li><a href="comunicazioni.html">Comunicazioni</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="candidature.html">Candidature</a></li>
+        <li><a href="unban.html">Richieste Unban</a></li>
+        <li><a href="admin.html">Admin Panel</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
-<main>
+<!-- Hero moderno -->
 <section class="hero">
-<div class="container">
-<h2>Benvenuto su TheGalaxyHub!</h2>
-<p>La community spaziale dove puoi restare aggiornato sugli ultimi annunci, comunicazioni e unirti al nostro team.</p>
-</div>
+  <div class="container">
+    <h2>Benvenuto su TheGalaxyHub!</h2>
+    <p>Unisciti alla nostra community spaziale: annunci, comunicazioni e il team ti aspettano!</p>
+    <a href="annunci.html" class="cta-button">Scopri gli Annunci</a>
+  </div>
 </section>
 
+<!-- Ultimi Annunci -->
 <section class="latest container">
-<h3>Ultimi Annunci</h3>
-<ul id="latest-annunci"></ul>
+  <h3>Ultimi Annunci</h3>
+  <div id="latest-annunci" class="cards-grid">
+    <!-- Cards popolate via script.js -->
+  </div>
 </section>
-</main>
+
+<!-- Sezione informazioni -->
+<section class="info container">
+  <div class="info-card">
+    <h4>Comunicazioni</h4>
+    <p>Rimani aggiornato sulle ultime novità della community.</p>
+    <a href="comunicazioni.html" class="cta-small">Vai alle comunicazioni</a>
+  </div>
+  <div class="info-card">
+    <h4>Team Staff</h4>
+    <p>Scopri chi gestisce e modera la community.</p>
+    <a href="team.html" class="cta-small">Scopri il team</a>
+  </div>
+  <div class="info-card">
+    <h4>Unisciti a noi</h4>
+    <p>Invia la tua candidatura e entra a far parte del progetto.</p>
+    <a href="candidature.html" class="cta-small">Invia candidatura</a>
+  </div>
+</section>
 
 <footer>
-<div class="container">
-<p>&copy; 2026 TheGalaxyHub. Tutti i diritti riservati.</p>
-</div>
+  <div class="container">
+    <p>&copy; 2026 TheGalaxyHub. Tutti i diritti riservati.</p>
+  </div>
 </footer>
 
 <script src="script.js"></script>
