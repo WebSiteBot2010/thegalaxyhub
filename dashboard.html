@@ -1,59 +1,63 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dashboard - TheGalaxyHub</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin - TheGalaxyHub</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
+  <div class="dashboard-container">
 
-<header>
-  <div class="container">
-    <h1>Dashboard Admin</h1>
-    <nav>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>TheGalaxyHub</h2>
       <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="login.html" onclick="logout()">Logout</a></li>
+        <li onclick="mostraSezione('annunci')">Annunci</li>
+        <li onclick="mostraSezione('comunicazioni')">Comunicazioni</li>
+        <li onclick="mostraSezione('team')">Team Staff</li>
+        <li onclick="mostraSezione('candidature')">Candidature</li>
+        <li onclick="mostraSezione('unban')">Richieste Unban</li>
+        <li onclick="logout()">Logout</li>
       </ul>
-    </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      
+      <section id="annunci" class="dashboard-section">
+        <h2>Annunci</h2>
+        <button class="btn" onclick="aggiungiAnnuncio()">Aggiungi Annuncio</button>
+        <ul id="annunci-list"></ul>
+      </section>
+
+      <section id="comunicazioni" class="dashboard-section">
+        <h2>Comunicazioni</h2>
+        <button class="btn" onclick="aggiungiComunicazione()">Aggiungi Comunicazione</button>
+        <ul id="comunicazioni-list"></ul>
+      </section>
+
+      <section id="team" class="dashboard-section">
+        <h2>Team Staff</h2>
+        <button class="btn" onclick="aggiungiTeam()">Aggiungi Membro</button>
+        <ul id="team-list"></ul>
+      </section>
+
+      <section id="candidature" class="dashboard-section">
+        <h2>Candidature</h2>
+        <ul id="candidature-list"></ul>
+      </section>
+
+      <section id="unban" class="dashboard-section">
+        <h2>Richieste Unban</h2>
+        <ul id="unban-list"></ul>
+      </section>
+
+    </main>
+
   </div>
-</header>
 
-<main class="container dashboard">
-
-  <section>
-    <h2>Annunci</h2>
-    <ul id="annunci-list"></ul>
-    <button onclick="aggiungiAnnuncio()">Aggiungi Annuncio</button>
-  </section>
-
-  <section>
-    <h2>Comunicazioni</h2>
-    <ul id="comunicazioni-list"></ul>
-    <button onclick="aggiungiComunicazione()">Aggiungi Comunicazione</button>
-  </section>
-
-  <section>
-    <h2>Team</h2>
-    <ul id="team-list"></ul>
-    <button onclick="aggiungiTeam()">Aggiungi Membro</button>
-  </section>
-
-  <section>
-    <h2>Candidature</h2>
-    <ul id="candidature-list"></ul>
-  </section>
-
-  <section>
-    <h2>Richieste Unban</h2>
-    <ul id="unban-list"></ul>
-  </section>
-
-</main>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

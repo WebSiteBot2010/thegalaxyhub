@@ -1,245 +1,206 @@
-/////////////////////////////////////////////////////
-// Mock data iniziale o caricamento da localStorage
-/////////////////////////////////////////////////////
+// LOGIN
+function login() {
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const msg = document.getElementById('login-msg');
 
-let annunci = JSON.parse(localStorage.getItem("annunci")) || [
-    "🎉 Benvenuto nella community TheGalaxyHub!",
-    "🚀 Server Discord aggiornato!"
-];
+  const validEmail = "support@thegalaxyhub";
+  const validPassword = "thegalaxyhubstaff";
 
-let comunicazioni = JSON.parse(localStorage.getItem("comunicazioni")) || [
-    "📢 Comunicazione ufficiale: nuova regola server!"
-];
+  if (email === validEmail && password === validPassword) {
+    localStorage.setItem('isAdmin', 'true');
+    window.location.href = "dashboard.html";
+  } else {
+    msg.textContent = "Email o password errata!";
+    msg.style.color = "red";
+  }
+}
 
-let team = JSON.parse(localStorage.getItem("team")) || [
-    {nome: "Admin", ruolo: "Founder"},
-    {nome: "Mod1", ruolo: "Moderatore"}
-];
+// LOGOUT
+function logout() {
+  localStorage.removeItem('isAdmin');
+  window.location.href = "login.html";
+}
 
+// CONTROLLO ACCESSO DASHBOARD
+if (window.location.pathname.endsWith('dashboard.html')) {
+  if (localStorage.getItem('isAdmin') !== 'true') {
+    alert("Devi loggarti come admin!");
+    window.location.href = "login.html";
+  }
+}
+
+// DATI INIZIALI
+let annunci = JSON.parse(localStorage.getItem("annunci")) || ["Benvenuto su TheGalaxyHub!"];
+let comunicazioni = JSON.parse(localStorage.getItem("comunicazioni")) || ["Prima comunicazione!"];
+let team = JSON.parse(localStorage.getItem("team")) || [{ nome: "Admin", ruolo: "Founder" }];
 let candidature = JSON.parse(localStorage.getItem("candidature")) || [];
 let unbanRequests = JSON.parse(localStorage.getItem("unbanRequests")) || [];
 
-/////////////////////////////////////////////////////
-// Helper per salvare tutto su localStorage
-/////////////////////////////////////////////////////
-
+// SALVA DATI
 function salvaDati() {
-    localStorage.setItem("annunci", JSON.stringify(annunci));
-    localStorage.setItem("comunicazioni", JSON.stringify(comunicazioni));
-    localStorage.setItem("team", JSON.stringify(team));
-    localStorage.setItem("candidature", JSON.stringify(candidature));
-    localStorage.setItem("unbanRequests", JSON.stringify(unbanRequests));
+  localStorage.setItem("annunci", JSON.stringify(annunci));
+  localStorage.setItem("comunicazioni", JSON.stringify(comunicazioni));
+  localStorage.setItem("team", JSON.stringify(team));
+  localStorage.setItem("candidature", JSON.stringify(candidature));
+  localStorage.setItem("unbanRequests", JSON.stringify(unbanRequests));
 }
 
-/////////////////////////////////////////////////////
-// Popolamento Home e Annunci
-/////////////////////////////////////////////////////
-
-function popolaAnnunci() {
-    const list = document.getElementById("annunci-list") || document.getElementById("latest-annunci");
-    if(list){
-        list.innerHTML = "";
-        annunci.forEach((a,i)=>{
-            const li = document.createElement("li");
-            li.textContent = a;
-            list.appendChild(li);
-        });
-    }
+// MOSTRA SEZIONE DASHBOARD
+function mostraSezione(id) {
+  const sections = document.querySelectorAll('.dashboard-section');
+  sections.forEach(sec => sec.style.display = 'none');
+  const target = document.getElementById(id);
+  if(target) target.style.display = 'block';
 }
 
-function popolaComunicazioni() {
-    const list = document.getElementById("comunicazioni-list");
-    if(list){
-        list.innerHTML = "";
-        comunicazioni.forEach((c,i)=>{
-            const li = document.createElement("li");
-            li.textContent = c;
-            list.appendChild(li);
-        });
-    }
-}
+// POPOLA LISTE
+function popolaListe() {
+  // ANNUNCI
+  const annunciList = document.getElementById("annunci-list");
+  if (annunciList) {
+    annunciList.innerHTML = "";
+    annunci.forEach((a, i) => {
+      const li = document.createElement("li");
+      li.textContent = a;
+      const btn = document.createElement("button");
+      btn.textContent = "Elimina";
+      btn.onclick = () => {
+        if(confirm(`Eliminare l'annuncio: "${a}"?`)){
+          annunci.splice(i,1);
+          salvaDati();
+          popolaListe();
+        }
+      }
+      li.appendChild(btn);
+      annunciList.appendChild(li);
+    });
+  }
 
-function popolaTeam() {
-    const list = document.getElementById("team-list");
-    if(list){
-        list.innerHTML = "";
-        team.forEach((m,i)=>{
-            const li = document.createElement("li");
-            li.textContent = `${m.nome} - ${m.ruolo}`;
-            list.appendChild(li);
-        });
-    }
-}
+  // COMUNICAZIONI
+  const comunicazioniList = document.getElementById("comunicazioni-list");
+  if(comunicazioniList){
+    comunicazioniList.innerHTML = "";
+    comunicazioni.forEach((c,i)=>{
+      const li = document.createElement("li");
+      li.textContent = c;
+      const btn = document.createElement("button");
+      btn.textContent = "Elimina";
+      btn.onclick = () => {
+        if(confirm(`Eliminare la comunicazione: "${c}"?`)){
+          comunicazioni.splice(i,1);
+          salvaDati();
+          popolaListe();
+        }
+      }
+      li.appendChild(btn);
+      comunicazioniList.appendChild(li);
+    });
+  }
 
-function popolaCandidature() {
-    const list = document.getElementById("candidature-list");
-    if(list){
-        list.innerHTML = "";
-        candidature.forEach((c,i)=>{
-            const li = document.createElement("li");
-            li.innerHTML = `
-            ${c.nome} (${c.email}) - "${c.motivo}"
-            <button onclick="approvaCandidatura(${i})">✅ Accetta</button>
-            <button onclick="rifiutaCandidatura(${i})">❌ Rifiuta</button>`;
-            list.appendChild(li);
-        });
-    }
-}
+  // TEAM
+  const teamList = document.getElementById("team-list");
+  if(teamList){
+    teamList.innerHTML = "";
+    team.forEach((m,i)=>{
+      const li = document.createElement("li");
+      li.textContent = `${m.nome} - ${m.ruolo}`;
+      const btn = document.createElement("button");
+      btn.textContent = "Rimuovi";
+      btn.onclick = () => {
+        if(confirm(`Rimuovere ${m.nome} dal team?`)){
+          team.splice(i,1);
+          salvaDati();
+          popolaListe();
+        }
+      }
+      li.appendChild(btn);
+      teamList.appendChild(li);
+    });
+  }
 
-function popolaUnban() {
-    const list = document.getElementById("unban-list");
-    if(list){
-        list.innerHTML = "";
-        unbanRequests.forEach((r,i)=>{
-            const li = document.createElement("li");
-            li.innerHTML = `
-            ${r.username} (${r.email}) - "${r.motivo}"
-            <button onclick="approvaUnban(${i})">✅ Accetta</button>
-            <button onclick="rifiutaUnban(${i})">❌ Rifiuta</button>`;
-            list.appendChild(li);
-        });
-    }
-}
-
-/////////////////////////////////////////////////////
-// Admin Login
-/////////////////////////////////////////////////////
-
-function loginAdmin(email,password){
-    if(email === "support@thegalaxyhub" && password === "thegalaxyhubstaff"){
-        alert("Login Admin Riuscito!");
-        document.getElementById("login-section").style.display = "none";
-        document.getElementById("admin-section").style.display = "block";
-        aggiornaAdmin();
-    } else {
-        alert("Email o password errata!");
-    }
-}
-
-/////////////////////////////////////////////////////
-// Admin Actions
-/////////////////////////////////////////////////////
-
-function aggiungiAnnuncio(){
-    const text = prompt("Testo dell'annuncio:");
-    if(text) {
-        annunci.push(text);
+  // CANDIDATURE
+  const candidatureList = document.getElementById("candidature-list");
+  if(candidatureList){
+    candidatureList.innerHTML = "";
+    candidature.forEach((c,i)=>{
+      const li = document.createElement("li");
+      li.textContent = `${c.nome} (${c.email}): ${c.motivo}`;
+      const btnAccetta = document.createElement("button");
+      btnAccetta.textContent = "Accetta";
+      btnAccetta.onclick = () => {
+        candidature.splice(i,1);
         salvaDati();
-        popolaAnnunci();
-        aggiornaAdmin();
-    }
+        popolaListe();
+        alert(`Candidatura di ${c.nome} accettata!`);
+      }
+      const btnRifiuta = document.createElement("button");
+      btnRifiuta.textContent = "Rifiuta";
+      btnRifiuta.onclick = () => {
+        candidature.splice(i,1);
+        salvaDati();
+        popolaListe();
+        alert(`Candidatura di ${c.nome} rifiutata!`);
+      }
+      li.appendChild(btnAccetta);
+      li.appendChild(btnRifiuta);
+      candidatureList.appendChild(li);
+    });
+  }
+
+  // UNBAN
+  const unbanList = document.getElementById("unban-list");
+  if(unbanList){
+    unbanList.innerHTML = "";
+    unbanRequests.forEach((u,i)=>{
+      const li = document.createElement("li");
+      li.textContent = `${u.username} (${u.email}): ${u.motivo}`;
+      const btnAccetta = document.createElement("button");
+      btnAccetta.textContent = "Accetta";
+      btnAccetta.onclick = () => {
+        unbanRequests.splice(i,1);
+        salvaDati();
+        popolaListe();
+        alert(`Richiesta unban di ${u.username} accettata!`);
+      }
+      const btnRifiuta = document.createElement("button");
+      btnRifiuta.textContent = "Rifiuta";
+      btnRifiuta.onclick = () => {
+        unbanRequests.splice(i,1);
+        salvaDati();
+        popolaListe();
+        alert(`Richiesta unban di ${u.username} rifiutata!`);
+      }
+      li.appendChild(btnAccetta);
+      li.appendChild(btnRifiuta);
+      unbanList.appendChild(li);
+    });
+  }
+}
+
+// FUNZIONI AGGIUNTA
+function aggiungiAnnuncio(){
+  const testo = prompt("Testo annuncio:");
+  if(testo){ annunci.push(testo); salvaDati(); popolaListe();}
 }
 
 function aggiungiComunicazione(){
-    const text = prompt("Testo comunicazione:");
-    if(text){
-        comunicazioni.push(text);
-        salvaDati();
-        popolaComunicazioni();
-        aggiornaAdmin();
-    }
+  const testo = prompt("Testo comunicazione:");
+  if(testo){ comunicazioni.push(testo); salvaDati(); popolaListe();}
 }
 
 function aggiungiTeam(){
-    const nome = prompt("Nome membro:");
-    const ruolo = prompt("Ruolo:");
-    if(nome && ruolo){
-        team.push({nome, ruolo});
-        salvaDati();
-        popolaTeam();
-        aggiornaAdmin();
-    }
+  const nome = prompt("Nome membro:");
+  if(!nome) return alert("Nome non valido");
+  const ruolo = prompt("Ruolo membro:");
+  if(!ruolo) return alert("Ruolo non valido");
+  team.push({nome: nome, ruolo: ruolo});
+  salvaDati();
+  popolaListe();
 }
 
-function rimuoviTeam(index){
-    if(confirm(`Rimuovere ${team[index].nome}?`)){
-        team.splice(index,1);
-        salvaDati();
-        popolaTeam();
-        aggiornaAdmin();
-    }
-}
-
-function approvaCandidatura(index){
-    alert(`Candidatura di ${candidature[index].nome} approvata!`);
-    candidature.splice(index,1);
-    salvaDati();
-    popolaCandidature();
-}
-
-function rifiutaCandidatura(index){
-    alert(`Candidatura di ${candidature[index].nome} rifiutata!`);
-    candidature.splice(index,1);
-    salvaDati();
-    popolaCandidature();
-}
-
-function approvaUnban(index){
-    alert(`Richiesta unban di ${unbanRequests[index].username} approvata!`);
-    unbanRequests.splice(index,1);
-    salvaDati();
-    popolaUnban();
-}
-
-function rifiutaUnban(index){
-    alert(`Richiesta unban di ${unbanRequests[index].username} rifiutata!`);
-    unbanRequests.splice(index,1);
-    salvaDati();
-    popolaUnban();
-}
-
-/////////////////////////////////////////////////////
-// Admin Update Display
-/////////////////////////////////////////////////////
-
-function aggiornaAdmin(){
-    popolaAnnunci();
-    popolaComunicazioni();
-    popolaTeam();
-    popolaCandidature();
-    popolaUnban();
-}
-
-/////////////////////////////////////////////////////
-// Gestione Form Candidature / Unban dal sito
-/////////////////////////////////////////////////////
-
-const candidatureForm = document.getElementById("candidature-form");
-if(candidatureForm){
-    candidatureForm.addEventListener("submit",(e)=>{
-        e.preventDefault();
-        const nome = e.target[0].value;
-        const email = e.target[1].value;
-        const motivo = e.target[2].value;
-        candidature.push({nome,email,motivo});
-        salvaDati();
-        alert("Candidatura inviata!");
-        e.target.reset();
-    });
-}
-
-const unbanForm = document.getElementById("unban-form");
-if(unbanForm){
-    unbanForm.addEventListener("submit",(e)=>{
-        e.preventDefault();
-        const username = e.target[0].value;
-        const email = e.target[1].value;
-        const motivo = e.target[2].value;
-        unbanRequests.push({username,email,motivo});
-        salvaDati();
-        alert("Richiesta unban inviata!");
-        e.target.reset();
-    });
-}
-
-/////////////////////////////////////////////////////
-// Popolamento automatico pagine
-/////////////////////////////////////////////////////
-
+// AL CARICAMENTO DELLA PAGINA
 document.addEventListener("DOMContentLoaded",()=>{
-    popolaAnnunci();
-    popolaComunicazioni();
-    popolaTeam();
-    popolaCandidature();
-    popolaUnban();
+  popolaListe();
+  mostraSezione('annunci'); // default sezione aperta
 });

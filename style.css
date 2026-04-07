@@ -108,3 +108,21 @@ footer { text-align:center; background:#111; padding:1.5rem 0; color:#aaa; }
   color: #61dafb;
   box-shadow: 0 0 15px #61dafb;
 }
+/* RESET BASE */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+
+/* DASHBOARD */
+.dashboard-container{display:flex;min-height:100vh;background:#0d0d1a;color:#fff;}
+.sidebar{width:220px;background:#11112b;padding:20px;display:flex;flex-direction:column;}
+.sidebar h2{text-align:center;margin-bottom:20px;color:#00e0ff;}
+.sidebar ul{list-style:none;}
+.sidebar ul li{padding:10px;cursor:pointer;border-radius:5px;margin-bottom:5px;transition:0.2s;}
+.sidebar ul li:hover{background:#00e0ff;color:#000;}
+.dashboard-main{flex:1;padding:20px;background:#14142f;}
+.dashboard-section{display:none;margin-bottom:30px;}
+.dashboard-section h2{margin-bottom:15px;color:#00e0ff;}
+ul{list-style:none;}
+ul li{padding:10px;background:#1b1b3d;margin-bottom:5px;border-radius:5px;display:flex;justify-content:space-between;align-items:center;}
+button{padding:5px 10px;border:none;border-radius:5px;cursor:pointer;background:#00e0ff;color:#000;transition:0.2s;}
+button:hover{background:#00b8cc;}
+.btn{margin-bottom:10px;}
