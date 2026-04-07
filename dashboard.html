@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Admin - TheGalaxyHub</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dashboard-style.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
@@ -29,18 +29,21 @@
       <section id="annunci" class="dashboard-section">
         <h2>Annunci</h2>
         <button class="btn" onclick="aggiungiAnnuncio()">Aggiungi Annuncio</button>
+        <button class="btn" onclick="salvaModifiche()">💾 Salva modifiche</button>
         <ul id="annunci-list"></ul>
       </section>
 
       <section id="comunicazioni" class="dashboard-section">
         <h2>Comunicazioni</h2>
         <button class="btn" onclick="aggiungiComunicazione()">Aggiungi Comunicazione</button>
+        <button class="btn" onclick="salvaModifiche()">💾 Salva modifiche</button>
         <ul id="comunicazioni-list"></ul>
       </section>
 
       <section id="team" class="dashboard-section">
         <h2>Team Staff</h2>
         <button class="btn" onclick="aggiungiTeam()">Aggiungi Membro</button>
+        <button class="btn" onclick="salvaModifiche()">💾 Salva modifiche</button>
         <ul id="team-list"></ul>
       </section>
 
@@ -58,6 +61,6 @@
 
   </div>
 
-  <script src="script.js"></script>
+  <script src="dashboard-script.js"></script>
 </body>
 </html>
