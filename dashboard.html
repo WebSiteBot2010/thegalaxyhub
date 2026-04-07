@@ -50,16 +50,24 @@
 
   <!-- Sezioni -->
   <div id="annunci" class="dashboard-section">
-    <h2>Annunci</h2>
-    <button onclick="aggiungiAnnuncio()">Aggiungi Annuncio</button>
-    <ul id="annunci-list"></ul>
-  </div>
+  <h2>Annunci</h2>
+  <form id="form-annuncio" onsubmit="aggiungiAnnuncioForm(event)">
+    <input type="text" id="annuncio-titolo" placeholder="Titolo annuncio" required />
+    <textarea id="annuncio-descrizione" placeholder="Descrizione annuncio" required></textarea>
+    <button type="submit">Aggiungi Annuncio</button>
+  </form>
+  <ul id="annunci-list"></ul>
+</div>
 
   <div id="comunicazioni" class="dashboard-section">
-    <h2>Comunicazioni</h2>
-    <button onclick="aggiungiComunicazione()">Aggiungi Comunicazione</button>
-    <ul id="comunicazioni-list"></ul>
-  </div>
+  <h2>Comunicazioni</h2>
+  <form id="form-comunicazione" onsubmit="aggiungiComunicazioneForm(event)">
+    <input type="text" id="comunicazione-titolo" placeholder="Titolo comunicazione" required />
+    <textarea id="comunicazione-descrizione" placeholder="Descrizione comunicazione" required></textarea>
+    <button type="submit">Aggiungi Comunicazione</button>
+  </form>
+  <ul id="comunicazioni-list"></ul>
+</div>
 
   <div id="team" class="dashboard-section">
     <h2>Team</h2>
