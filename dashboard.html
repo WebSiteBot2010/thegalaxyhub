@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - TheGalaxyHub</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+<header>
+<div class="container">
+<h1>Dashboard Admin</h1>
+<nav>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="dashboard.html">Dashboard</a></li>
+<li><a href="login.html">Logout</a></li>
+</ul>
+</nav>
+</div>
+</header>
+
+<main class="container dashboard">
+
+<section>
+<h2>Annunci</h2>
+<ul id="annunci-list"></ul>
+<button onclick="aggiungiAnnuncio()">Aggiungi Annuncio</button>
+</section>
+
+<section>
+<h2>Comunicazioni</h2>
+<ul id="comunicazioni-list"></ul>
+<button onclick="aggiungiComunicazione()">Aggiungi Comunicazione</button>
+</section>
+
+<section>
+<h2>Team</h2>
+<ul id="team-list"></ul>
+<button onclick="aggiungiTeam()">Aggiungi Membro</button>
+</section>
+
+<section>
+<h2>Candidature</h2>
+<ul id="candidature-list"></ul>
+</section>
+
+<section>
+<h2>Richieste Unban</h2>
+<ul id="unban-list"></ul>
+</section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
