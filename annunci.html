@@ -37,6 +37,34 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script>
+  function aggiornaDatiDallaStorage(key) {
+    if (key === 'annunci') {
+      const annunci = JSON.parse(localStorage.getItem('annunci')) || [];
+      const annunciList = document.getElementById('annunci-contents');
+      annunciList.innerHTML = '';
+      if (annunci.length === 0) {
+        annunciList.textContent = 'Nessun annuncio disponibile.';
+      } else {
+        annunci.forEach(annuncio => {
+          const li = document.createElement('li');
+          li.textContent = annuncio;
+          annunciList.appendChild(li);
+        });
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    aggiornaDatiDallaStorage('annunci');
+  });
+
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'annunci') {
+      aggiornaDatiDallaStorage('annunci');
+    }
+  });
+</script>
+
 </body>
 </html>

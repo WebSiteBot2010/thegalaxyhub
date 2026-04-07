@@ -1,66 +1,85 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dashboard Admin - TheGalaxyHub</title>
-  <link rel="stylesheet" href="dashboard-style.css">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <style>
+    /* Stile base moderno per dashboard */
+    body { font-family: Arial, sans-serif; background: #1b1b2f; color: #fff; margin:0; }
+    header { background:#111; padding:10px 20px; display:flex; justify-content:space-between; align-items:center;}
+    header h1 { margin:0; font-size:1.5em; }
+    nav ul { display:flex; list-style:none; margin:0; padding:0;}
+    nav li { margin-left:15px; }
+    nav a { color:#fff; text-decoration:none; }
+    .container { padding:20px; }
+    .dashboard-section { display:none; margin-top:20px; }
+    ul { list-style:none; padding:0; }
+    li { padding:8px; background:#2b2b44; margin-bottom:5px; display:flex; justify-content:space-between; align-items:center; border-radius:5px; }
+    button { background:#4caf50; border:none; padding:5px 10px; color:#fff; border-radius:3px; cursor:pointer; margin-left:5px; }
+    button:hover { background:#45a049; }
+    .nav-dashboard { margin-bottom:10px; }
+    .nav-dashboard button { background:#333; margin-right:5px; }
+    .nav-dashboard button:hover { background:#555; }
+    .save-btn { background:#2196f3; }
+    .save-btn:hover { background:#0b7dda; }
+  </style>
 </head>
 <body>
-  <div class="dashboard-container">
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <h2>TheGalaxyHub</h2>
-      <ul>
-        <li onclick="mostraSezione('annunci')">Annunci</li>
-        <li onclick="mostraSezione('comunicazioni')">Comunicazioni</li>
-        <li onclick="mostraSezione('team')">Team Staff</li>
-        <li onclick="mostraSezione('candidature')">Candidature</li>
-        <li onclick="mostraSezione('unban')">Richieste Unban</li>
-        <li onclick="logout()">Logout</li>
-      </ul>
-    </aside>
+<header>
+  <h1>Dashboard Admin</h1>
+  <button onclick="logout()">Logout</button>
+</header>
 
-    <!-- Main Content -->
-    <main class="dashboard-main">
-      
-      <section id="annunci" class="dashboard-section">
-        <h2>Annunci</h2>
-        <button class="btn" onclick="aggiungiAnnuncio()">Aggiungi Annuncio</button>
-        <button class="btn" onclick="salvaModifiche()">💾 Salva modifiche</button>
-        <ul id="annunci-list"></ul>
-      </section>
+<div class="container">
 
-      <section id="comunicazioni" class="dashboard-section">
-        <h2>Comunicazioni</h2>
-        <button class="btn" onclick="aggiungiComunicazione()">Aggiungi Comunicazione</button>
-        <button class="btn" onclick="salvaModifiche()">💾 Salva modifiche</button>
-        <ul id="comunicazioni-list"></ul>
-      </section>
-
-      <section id="team" class="dashboard-section">
-        <h2>Team Staff</h2>
-        <button class="btn" onclick="aggiungiTeam()">Aggiungi Membro</button>
-        <button class="btn" onclick="salvaModifiche()">💾 Salva modifiche</button>
-        <ul id="team-list"></ul>
-      </section>
-
-      <section id="candidature" class="dashboard-section">
-        <h2>Candidature</h2>
-        <ul id="candidature-list"></ul>
-      </section>
-
-      <section id="unban" class="dashboard-section">
-        <h2>Richieste Unban</h2>
-        <ul id="unban-list"></ul>
-      </section>
-
-    </main>
-
+  <!-- Navigazione interna -->
+  <div class="nav-dashboard">
+    <button onclick="mostraSezione('annunci')">Annunci</button>
+    <button onclick="mostraSezione('comunicazioni')">Comunicazioni</button>
+    <button onclick="mostraSezione('team')">Team</button>
+    <button onclick="mostraSezione('candidature')">Candidature</button>
+    <button onclick="mostraSezione('unban')">Richieste Unban</button>
   </div>
 
-  <script src="dashboard-script.js"></script>
+  <!-- Bottone salva modifiche -->
+  <button class="save-btn" onclick="salvaModifiche()">Salva Modifiche</button>
+
+  <!-- Sezioni -->
+  <div id="annunci" class="dashboard-section">
+    <h2>Annunci</h2>
+    <button onclick="aggiungiAnnuncio()">Aggiungi Annuncio</button>
+    <ul id="annunci-list"></ul>
+  </div>
+
+  <div id="comunicazioni" class="dashboard-section">
+    <h2>Comunicazioni</h2>
+    <button onclick="aggiungiComunicazione()">Aggiungi Comunicazione</button>
+    <ul id="comunicazioni-list"></ul>
+  </div>
+
+  <div id="team" class="dashboard-section">
+    <h2>Team</h2>
+    <button onclick="aggiungiTeam()">Aggiungi Membro</button>
+    <ul id="team-list"></ul>
+  </div>
+
+  <div id="candidature" class="dashboard-section">
+    <h2>Candidature</h2>
+    <ul id="candidature-list"></ul>
+  </div>
+
+  <div id="unban" class="dashboard-section">
+    <h2>Richieste Unban</h2>
+    <ul id="unban-list"></ul>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>

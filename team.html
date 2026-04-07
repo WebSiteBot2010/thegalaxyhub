@@ -37,6 +37,34 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script>
+  function aggiornaDatiDallaStorage(key) {
+    if (key === 'team') {
+      const team = JSON.parse(localStorage.getItem('team')) || [];
+      const teamList = document.getElementById('team-contents');
+      teamList.innerHTML = '';
+      if (team.length === 0) {
+        teamList.textContent = 'Nessun membro del team disponibile.';
+      } else {
+        team.forEach(membro => {
+          const li = document.createElement('li');
+          li.textContent = `${membro.nome} - ${membro.ruolo}`;
+          teamList.appendChild(li);
+        });
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    aggiornaDatiDallaStorage('team');
+  });
+
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'team') {
+      aggiornaDatiDallaStorage('team');
+    }
+  });
+</script>
+
 </body>
 </html>

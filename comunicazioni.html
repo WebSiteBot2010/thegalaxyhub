@@ -37,6 +37,34 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script>
+  function aggiornaDatiDallaStorage(key) {
+    if (key === 'comunicazioni') {
+      const comunicazioni = JSON.parse(localStorage.getItem('comunicazioni')) || [];
+      const comunicazioniList = document.getElementById('comunicazioni-contents');
+      comunicazioniList.innerHTML = '';
+      if (comunicazioni.length === 0) {
+        comunicazioniList.textContent = 'Nessuna comunicazione disponibile.';
+      } else {
+        comunicazioni.forEach(comunicazione => {
+          const li = document.createElement('li');
+          li.textContent = comunicazione;
+          comunicazioniList.appendChild(li);
+        });
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    aggiornaDatiDallaStorage('comunicazioni');
+  });
+
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'comunicazioni') {
+      aggiornaDatiDallaStorage('comunicazioni');
+    }
+  });
+</script>
+
 </body>
 </html>
